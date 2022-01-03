@@ -1,5 +1,6 @@
 let number = document.querySelectorAll('[data-number]')
 let operationField = document.querySelectorAll('[data-operation]');
+let operationFieldX = document.querySelectorAll('[data-operation-x]');
 let equals = document.querySelector('[data-equals]');
 let clearEntryField = document.querySelector('[data-clear-entry]');
 let allClear = document.querySelector('[data-all-clear]');
@@ -12,7 +13,6 @@ let previous = '';
 let result = '';
 
 function addNumber(number) {
-    console.log(current)
     if (number === '.' && current.toString().includes('.')) return;
     current = current.toString() + number.toString();
 }
@@ -65,6 +65,27 @@ function calculate() {
     operation = undefined;
 }
 
+function calculateX(signX){
+    const currX = parseFloat(current);
+    const prevX = parseFloat(previous);
+    
+    if (!isNaN(prevX) || isNaN(currX)) return;
+    switch(signX){
+        case '√':
+            result = Math.sqrt(currX);
+            break;
+        case 'x²':
+            result = currX*currX;
+            break;
+        default: 
+            return;
+    }
+    current = result;
+    currentField.innerText = result;
+    operation = undefined;
+}
+
+
 function clearAll() {
     previousField.innerText = '';
     previous = '';
@@ -93,6 +114,12 @@ operationField.forEach(button => {
     })
 })
 
+operationFieldX.forEach(button => {
+    button.addEventListener('click', () => {
+        calculateX(button.innerText);
+    })
+})
+
 equals.addEventListener('click', button => {
     calculate();
 })
@@ -103,3 +130,4 @@ allClear.addEventListener('click', () => {
 clearEntryField.addEventListener('click', () => {
     clearEntry();
 })
+
