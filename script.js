@@ -15,6 +15,7 @@ let previous = '';
 let result = '';
 
 function addNumber(number) {
+    if (current.length > 15) return;
     if (number === '.' && current.toString().includes('.')) return;
     if (!(number.match(/[0-9]|\./))) return;
     current = current.toString() + number.toString();
@@ -133,8 +134,8 @@ clearEntryField.addEventListener('click', () => {
     clearEntry();
 })
 
-document.addEventListener('keypress', e => {
-    console.log(e.key)
+document.addEventListener('keydown', e => {
+    console.log(e)
     if(keyTableNumbers.includes(e.key)){
         addNumber(e.key);
         display();    
@@ -151,5 +152,17 @@ document.addEventListener('keypress', e => {
     }
     if(e.key == '^'){
         calculateX('x²')
+    }
+    if(e.key == 'Delete'){
+        clearEntry();
+    }
+    if(e.key == 'Escape'){
+        clearAll();
+    }
+    if(e.key == 'Backspace'){
+        if(current.length>0){
+            current = current.slice(0,-1);
+            display();
+        }
     }
 }); 
