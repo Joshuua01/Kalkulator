@@ -6,7 +6,9 @@ let clearEntryField = document.querySelector('[data-clear-entry]');
 let allClear = document.querySelector('[data-all-clear]');
 let previousField = document.querySelector('[data-previous]');
 let currentField = document.querySelector('[data-current]');
-
+const keyTableNumbers = ['0','1','2','3','4','5','6','7','8','9','.'];
+const keyTableOperations = ['/','*','+','-'];
+const keyTableOperationsX = [];
 let operation = '';
 let current = '';
 let previous = '';
@@ -14,6 +16,7 @@ let result = '';
 
 function addNumber(number) {
     if (number === '.' && current.toString().includes('.')) return;
+    if (!(number.match(/[0-9]|\./))) return;
     current = current.toString() + number.toString();
 }
 
@@ -42,7 +45,7 @@ function calculate() {
         case '-':
             result = prev - curr;
             break;
-        case '÷':
+        case '/':
             if (curr == 0) {
                 previous = '';
                 previousField.innerText = '';
@@ -52,7 +55,7 @@ function calculate() {
             }
             result = prev / curr;
             break;
-        case '×':
+        case '*':
             result = prev * curr;
             break;
         default:
@@ -84,7 +87,6 @@ function calculateX(signX){
     currentField.innerText = result;
     operation = undefined;
 }
-
 
 function clearAll() {
     previousField.innerText = '';
@@ -131,3 +133,23 @@ clearEntryField.addEventListener('click', () => {
     clearEntry();
 })
 
+document.addEventListener('keypress', e => {
+    console.log(e.key)
+    if(keyTableNumbers.includes(e.key)){
+        addNumber(e.key);
+        display();    
+    }
+    if(keyTableOperations.includes(e.key)){
+        mathOperation(e.key);
+        display();
+    }
+    if(e.key == 'Enter'){
+        calculate();
+    }
+    if(e.key == '@'){
+        calculateX('√')
+    }
+    if(e.key == '^'){
+        calculateX('x²')
+    }
+}); 
