@@ -23,14 +23,14 @@ body {
     display: flex;
     flex-direction: column;
     width: 25%;
-    height: 50%;
+    height: 65%;
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.3);
 }
 
 .calculator-display {
-    height: 25%;
     display: flex;
     flex-direction: column;
+    flex: 15;
     padding: 1.5rem 2rem;
     background: rgb(27, 25, 25);
     justify-content: space-between;
@@ -38,13 +38,13 @@ body {
 }
 
 .calculator-display>.current {
-    font-size: 2vw;
+    font-size: 2.5rem;
     color: white;
 }
 
 .calculator-display>.previous {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1.2vw;
+    font-size: 2rem;
 }
 
 .calculator-display>.previous,
@@ -53,13 +53,10 @@ body {
 }
 
 .calculator-buttons {
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    background: none; */
     display: flex;
     flex-wrap: wrap;
-    height: 75%;
+    flex: 85;
+    background-color: #2d2d2d;
 }
 
 .calculator-buttons>button {
@@ -71,7 +68,7 @@ body {
     padding: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    font-size: 1.4vw;
+    font-size: 2rem;
 }
 
 .calculator-buttons>button:hover {
@@ -79,5 +76,39 @@ body {
     color: #2d2d2d;
     background-color: #c67554;
     transition: 0.15s ease;
+}
+
+
+
+@media (min-width: 300px) and ( max-width: 576px) {
+    .calculator {
+        width: 85%;
+        height: 70%;
+    }
+    .calculator-display>.current{
+        font-size: 2.2rem;
+    }
+    .calculator-display>.previous{
+        font-size: 1.7rem;
+    }
+    .calculator-buttons>button {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 1000px) {
+    .calculator {
+        width: 60%;
+        height: 70%;
+    }
+    .calculator-display>.current{
+        font-size: 2.6rem;
+    }
+    .calculator-display>.previous{
+        font-size: 2rem;
+    }
+    .calculator-buttons>button {
+        font-size: 2.4rem;
+    }
 }
 

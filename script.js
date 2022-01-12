@@ -6,8 +6,8 @@ let clearEntryField = document.querySelector('[data-clear-entry]');
 let allClear = document.querySelector('[data-all-clear]');
 let previousField = document.querySelector('[data-previous]');
 let currentField = document.querySelector('[data-current]');
-const keyTableNumbers = ['0','1','2','3','4','5','6','7','8','9','.'];
-const keyTableOperations = ['/','*','+','-'];
+const keyTableNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+const keyTableOperations = ['/', '*', '+', '-'];
 const keyTableOperationsX = [];
 let operation = '';
 let current = '';
@@ -15,7 +15,7 @@ let previous = '';
 let result = '';
 
 function addNumber(number) {
-    if(current === Infinity) clearAll();
+    if (current === Infinity) clearAll();
     if (current.length > 15) return;
     if (number === '.' && current.toString().includes('.')) return;
     if (!(number.match(/[0-9]|\./))) return;
@@ -70,19 +70,19 @@ function calculate() {
     operation = undefined;
 }
 
-function calculateX(signX){
+function calculateX(signX) {
     const currX = parseFloat(current);
     const prevX = parseFloat(previous);
-    
+
     if (!isNaN(prevX) || isNaN(currX)) return;
-    switch(signX){
+    switch (signX) {
         case '√':
             result = Math.sqrt(currX);
             break;
         case 'x²':
-            result = currX*currX;
+            result = currX * currX;
             break;
-        default: 
+        default:
             return;
     }
     current = result;
@@ -137,33 +137,33 @@ clearEntryField.addEventListener('click', () => {
 
 document.addEventListener('keydown', e => {
     console.log(e)
-    if(keyTableNumbers.includes(e.key)){
+    if (keyTableNumbers.includes(e.key)) {
         addNumber(e.key);
-        display();    
+        display();
     }
-    if(keyTableOperations.includes(e.key)){
+    if (keyTableOperations.includes(e.key)) {
         mathOperation(e.key);
         display();
     }
-    if(e.key == 'Enter'){
+    if (e.key == 'Enter') {
         calculate();
     }
-    if(e.key == '@'){
+    if (e.key == '@') {
         calculateX('√')
     }
-    if(e.key == '^'){
+    if (e.key == '^') {
         calculateX('x²')
     }
-    if(e.key == 'Delete'){
+    if (e.key == 'Delete') {
         clearEntry();
     }
-    if(e.key == 'Escape'){
+    if (e.key == 'Escape') {
         clearAll();
     }
-    if(e.key == 'Backspace'){
-        if(current.length>0){
-            current = current.slice(0,-1);
+    if (e.key == 'Backspace') {
+        if (current.length > 0) {
+            current = current.slice(0, -1);
             display();
         }
     }
-}); 
+});
