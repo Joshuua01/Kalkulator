@@ -15,6 +15,7 @@ let previous = '';
 let result = '';
 
 function addNumber(number) {
+    if(current === Infinity) clearAll();
     if (current.length > 15) return;
     if (number === '.' && current.toString().includes('.')) return;
     if (!(number.match(/[0-9]|\./))) return;
